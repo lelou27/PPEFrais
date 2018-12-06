@@ -69,6 +69,16 @@ switch ($action) {
             $montant = trim(strip_tags($_POST['montant']));
 
             $pdo->validerFicheFrais($idVisiteur,$mois,'VA', $montant);
+
+            header('Location: index.php?uc=validerFrais&action=validerFrais');
         }
+        break;
+    case 'supprimerHorsForfait':
+        $month = trim(strip_tags($_GET['month']));
+        $libelle = trim(strip_tags($_GET['libelle']));
+        $idVisiteur = trim(strip_tags($_GET['idVisiteur']));
+
+        $pdo->desactiverFraisHorsForfait($idVisiteur,$month, $libelle);
+        return true;
         break;
 }

@@ -55,6 +55,7 @@
                 <th class="date">Date</th>
                 <th class="libelle">Libellé</th>
                 <th class='montant'>Montant</th>
+                <th>Action</th>
             </tr>
             <?php
             foreach ($lesFraisHorsForfait as $unFraisHorsForfait) {
@@ -66,6 +67,10 @@
                     <td><?php echo $date ?></td>
                     <td><?php echo $libelle ?></td>
                     <td><?php echo $montant ?></td>
+                    <td><input type="submit" class="delFraisHorsForfait" value="Supprimer"></td>
+                    <input class="month" type="hidden" name="mois" value="<?= $numAnnee . $numMois ?>">
+                    <input class="libelle" type="hidden" name="libelle" value="<?php echo $libelle ?>">
+                    <input class="visiteur" type="hidden" name="idVisiteur" value="<?= $idVisiteur ?>">
                 </tr>
                 <?php
             }
@@ -82,3 +87,21 @@
     ?>
 </div>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    $('.delFraisHorsForfait').click(function (e) {
+        e.preventDefault();
+        var month = $('.month').val();
+        var libelle = $('.libelle')[1].value;
+        var idVisiteur = $('.visiteur').val();
+
+        $.ajax({
+            url : 'index.php?uc=validerFrais&action=supprimerHorsForfait&month=' + month + '&libelle=' + libelle + '&idVisiteur='+idVisiteur,
+            type : 'GET',
+            success : function(data){
+                window.location.reload();
+            }
+        });
+    })
+</script>

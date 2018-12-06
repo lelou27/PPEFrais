@@ -337,5 +337,12 @@ class PdoGsb{
 		where FicheFrais.idVisiteur ='$idVisiteur' and FicheFrais.mois = '$mois'";
         PdoGsb::$monPdo->exec($req);
     }
+
+    public function desactiverFraisHorsForfait($idVisiteur,$mois, $libelle){
+	    $libelle = 'REFUSE : ' . $libelle;
+        $req = "update LigneFraisHorsForfait SET libelle = '$libelle' WHERE idVisiteurFicheFrais = '$idVisiteur'
+                AND moisFicheFrais = $mois";
+        PdoGsb::$monPdo->exec($req);
+    }
 }
 ?>
