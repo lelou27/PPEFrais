@@ -48,4 +48,18 @@ switch ($action) {
         }
 
         break;
+    case 'ValiderMajFraisForfait':
+        if (!empty($_POST)) {
+            $newQuantite = trim(strip_tags($_POST['newQuantite']));
+            $mois = trim(strip_tags($_POST['mois']));
+            $numAnnee = trim(strip_tags($_POST['annee']));
+            $idVisiteur = trim(strip_tags($_POST['idVisiteur']));
+            $unIdFrais = trim(strip_tags($_POST['idFraisForfait']));
+            $mois = $numAnnee . $mois;
+
+            $pdo->majFraisForfaitQuantite($idVisiteur, $mois, $newQuantite, $unIdFrais);
+
+            header('Location: index.php?uc=validerFrais&action=validerFrais');
+        }
+        break;
 }

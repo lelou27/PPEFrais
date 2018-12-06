@@ -163,6 +163,14 @@ class PdoGsb{
 		}
 		
 	}
+
+    public function majFraisForfaitQuantite($idVisiteur, $mois, $qte, $unIdFrais){
+            $req = "update LigneFraisForfait set LigneFraisForfait.quantite = $qte
+			where LigneFraisForfait.idVisiteurFicheFrais = '$idVisiteur' and LigneFraisForfait.moisFicheFrais = '$mois'
+			and LigneFraisForfait.idFraisForfait = '$unIdFrais'";
+            PdoGsb::$monPdo->exec($req);
+
+    }
 /**
  * met à jour le nombre de justificatifs de la table ficheFrais
  * pour le mois et le visiteur concerné

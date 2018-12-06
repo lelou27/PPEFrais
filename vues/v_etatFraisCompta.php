@@ -4,38 +4,45 @@
 <div class="encadre" style="margin-left: .5em; padding: 1em; margin-bottom: 1em;">
     <p>
         Etat : <?php echo $libEtat?> depuis le <?php echo $dateModif?> <br> Montant validé : <?php echo $montantValide?>
-
-
     </p>
     <?php
     if (!empty($lesFraisForfait)) {
     ?>
-        <table class="listeLegere">
-            <caption>Eléments forfaitisés </caption>
-            <tr>
-                <?php
-                foreach ( $lesFraisForfait as $unFraisForfait )
-                {
-                    $libelle = $unFraisForfait['libelle'];
-                    ?>
-                    <th> <?php echo $libelle?></th>
+        <form action="index.php?uc=validerFrais&action=ValiderMajFraisForfait" method="post">
+            <input type="hidden" name="mois" value="<?= $numMois ?>">
+            <input type="hidden" name="annee" value="<?= $numAnnee ?>">
+            <input type="hidden" name="idVisiteur" value="<?= $idVisiteur ?>">
+            <input type="hidden" name="idFraisForfait" value="<?= $lesFraisForfait[0][0] ?>">
+            <table class="listeLegere">
+                <caption>Eléments forfaitisés </caption>
+                <tr>
                     <?php
-                }
-                ?>
-            </tr>
-            <tr>
-                <?php
-                foreach (  $lesFraisForfait as $unFraisForfait  )
-                {
-                    $quantite = $unFraisForfait['quantite'];
+                    foreach ( $lesFraisForfait as $unFraisForfait )
+                    {
+                        $libelle = $unFraisForfait['libelle'];
+                        ?>
+                        <th> <?php echo $libelle?></th>
+                        <?php
+                    }
                     ?>
-                    <td class="qteForfait"><?php echo $quantite?> </td>
+                </tr>
+                <tr>
                     <?php
-                }
-                ?>
-            </tr>
-        </table>
-    <?php
+                    foreach (  $lesFraisForfait as $unFraisForfait  )
+                    {
+                        $quantite = $unFraisForfait['quantite'];
+                        ?>
+                        <td class="qteForfait"><input type="text" name="newQuantite" value="<?php echo $quantite?>"></td>
+                        <?php
+                    }
+                    ?>
+                </tr>
+
+
+            </table>
+            <input type="submit" value="Valider">
+        </form>
+        <?php
     } else
         echo '<h3>Pas de fiche de frais pour ce visiteur ce mois</h3>';
 
