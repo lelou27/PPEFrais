@@ -330,5 +330,12 @@ class PdoGsb{
 
         return $visiteurs;
 	}
+
+
+    public function validerFicheFrais($idVisiteur,$mois,$Etat, $montantValide){
+        $req = "update FicheFrais set idEtat = '$Etat', dateModif = now(), montantValide = '$montantValide'
+		where FicheFrais.idVisiteur ='$idVisiteur' and FicheFrais.mois = '$mois'";
+        PdoGsb::$monPdo->exec($req);
+    }
 }
 ?>

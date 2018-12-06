@@ -62,4 +62,13 @@ switch ($action) {
             header('Location: index.php?uc=validerFrais&action=validerFrais');
         }
         break;
+    case 'ValiderFicheFrais':
+        if (!empty($_POST)) {
+            $idVisiteur = trim(strip_tags($_POST['idVisiteur']));
+            $mois = trim(strip_tags($_POST['mois']));
+            $montant = trim(strip_tags($_POST['montant']));
+
+            $pdo->validerFicheFrais($idVisiteur,$mois,'VA', $montant);
+        }
+        break;
 }

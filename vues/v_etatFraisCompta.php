@@ -71,7 +71,12 @@
             }
             ?>
         </table>
-        <a href="">Valider la fiche de frais</a>
+        <form action="index.php?uc=validerFrais&action=ValiderFicheFrais" method="post">
+            <input type="hidden" name="idVisiteur" value="<?= $idVisiteur ?>">
+            <input type="hidden" name="mois" value="<?= $numAnnee . $numMois ?>">
+            <input type="hidden" name="montant" value="<?= $montant ?>">
+            <input type="submit" value="Valider la fiche de frais">
+        </form>
         <?php
     }
     ?>
